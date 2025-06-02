@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function DashboardPage() {
-  const { data, isError, isLoading } = useProdutividadeQuery();
+  const { data, isError, isLoading, error } = useProdutividadeQuery();
   const [filtrar, setFiltrar] = useState({
     estado: "",
     filtro: "",
@@ -28,7 +28,12 @@ export default function DashboardPage() {
     update();
   }, [processo.processo]);
   if (isLoading) return <div>Carregando...</div>;
-  if (isError) return <div>Error...</div>;
+  if (isError)
+    return (
+      <div>
+        <pre>{JSON.stringify(error, null, 2)}</pre>
+      </div>
+    );
 
   // Função para calcular a produtividade (caixas/hora)
   return (
