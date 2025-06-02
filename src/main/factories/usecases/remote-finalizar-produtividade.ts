@@ -11,6 +11,6 @@ export const makeRemoteFinalizarProdutividade = (
   accessToken?: string
 ): FinalizarProdutividade =>
   new RemoteFinalizarProdutividade(
-    makeApiUrl(`/finalizardemanda/${idPallet}/${transporte}`),
+    makeApiUrl(`/finalizardemanda/${processo}/${idPallet}/${transporte}`),
     new AuthorizeHttpClientDecorator(makeAxiosHttpClient(), accessToken)
   );
