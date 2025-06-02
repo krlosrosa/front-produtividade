@@ -11,14 +11,19 @@ import FuncionarioCadastro from "./components/formularioCadastro";
 export default function FinalizarProdutividade() {
   const { demanda, setDemandaOnChange } = useStoreFinalizarProdutividade();
 
-  const [cadastroRapido, setCadastroRapido] = useState("");
+  const [infoQrCode, setInfoQrCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const { data } = useFinalizarProdutividadeQuery();
   const { mutateAsync, isPending } = useFinalizarProdutividade();
 
   const handleAddProdutividade = async () => {
-    mutateAsync();
+    await mutateAsync();
+    setInfoQrCode("")
+    setDemandaOnChange({
+      idPallet:"",
+      transporte: ""
+    })
   };
 
   const openConfirmationDialog = () => {
@@ -41,6 +46,8 @@ export default function FinalizarProdutividade() {
       <ResumoTransporte data={data} />
       {/* Resumo de cadastro */}
       <FuncionarioCadastro
+      setInfoQrCode= {setInfoQrCode}
+      infoQrCode={infoQrCode}
         demanda={demanda}
         setDemandaOnChange={setDemandaOnChange}
       />

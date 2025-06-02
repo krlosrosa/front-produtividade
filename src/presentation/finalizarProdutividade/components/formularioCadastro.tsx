@@ -9,13 +9,16 @@ import { parseCadastroRapido } from "@/utils/cadastrorapido";
 type Props = {
   demanda: Demanda;
   setDemandaOnChange: (params: Partial<Demanda>) => void;
+  infoQrCode: string;
+  setInfoQrCode: Dispatch<SetStateAction<string>>;
 };
 
 export default function FuncionarioCadastro({
   demanda,
   setDemandaOnChange,
+  infoQrCode,
+  setInfoQrCode,
 }: Props) {
-  const [infoQrCode, setInfoQrCode] = useState("");
   function handleCadastroRapido() {
     const info = parseCadastroRapido(infoQrCode);
     setDemandaOnChange({
