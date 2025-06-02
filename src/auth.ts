@@ -10,7 +10,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const res = await fetch("https://produtividade.ragde.app/api/login", {
+          const res = await fetch(process.env.URL_LOGIN as string, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -66,7 +66,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async redirect({ url, baseUrl }) {
-      console.log(url)
+      console.log(url);
       return baseUrl; // redireciona para página inicial ("/")
     },
   },
