@@ -8,7 +8,7 @@ export const useProdutividadeQuery = () => {
     const { data: session } = useSession();
     const { processo } = useStoreProdutividade();
     
-    const { data, isError, isLoading, error } = useQuery<GetProdutividadeResult[]>({
+    const { data, isError, isLoading } = useQuery<GetProdutividadeResult[]>({
       queryKey: ["produtividade", processo.dataRegistro, processo.processo], // Adicione dependências aqui
       queryFn: () => {
         if (!session?.user.center || !processo.dataRegistro || !session?.user.accessToken || !processo.processo) {
@@ -31,5 +31,5 @@ export const useProdutividadeQuery = () => {
       enabled: !!session?.user.center && !!processo.dataRegistro // Só executa quando os dados necessários estão disponíveis
     });
     
-    return { data, isError, isLoading, error };
+    return { data, isError, isLoading };
 };
