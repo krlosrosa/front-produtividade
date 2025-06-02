@@ -1,0 +1,77 @@
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers: [
+    Credentials({
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Senha", type: "password" },
+      },
+      authorize: async (credentials) => {
+        try {
+          const res = await fetch("https://produtividade.ragde.app/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+          });
+
+          if (!res.ok) return null;
+
+          const user = await res.json();
+
+          if (user?.accessToken) {
+            return {
+              id: user.id || user.email || "user",
+              name: user.name,
+              center: user.center,
+              accessToken: user.accessToken,
+            };
+          }
+
+          return null;
+        } catch (err) {
+          console.error("Erro ao autenticar:", err);
+          return null;
+        }
+      },
+    }),
+  ],
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.name = user.name;
+        token.center = user.center;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      const typedToken = token as {
+        accessToken?: string;
+        name?: string;
+        center?: string;
+      };
+
+      session.user.accessToken = typedToken.accessToken;
+      session.user.name = typedToken.name;
+      session.user.center = typedToken.center;
+
+      return session;
+    },
+
+    async redirect({ url, baseUrl }) {
+      console.log(url)
+      return baseUrl; // redireciona para página inicial ("/")
+    },
+  },
+
+  pages: {
+    signIn: "/login",
+  },
+});
