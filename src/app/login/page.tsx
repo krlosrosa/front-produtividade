@@ -31,7 +31,7 @@ export default function SignIn() {
       });
 
       if (result?.error) {
-        toast.error("Email ou senha inválidos", {
+        toast.error("Id ou senha inválidos", {
           position: "bottom-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -86,12 +86,12 @@ export default function SignIn() {
         <form onSubmit={handleSubmit}>
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">ID</Label>
               <Input
                 id="email"
                 name="email"
                 type="text"
-                placeholder="seu@email.com"
+                placeholder="Informe seu ID..."
                 required
               />
             </div>
