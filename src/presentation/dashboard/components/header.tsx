@@ -1,7 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CheckCircle, PlusCircle } from "lucide-react";
+import AddPauseButton from "@/presentation/addpausa/addPausa";
+import FinalizarProdutividade from "@/presentation/finalizarProdutividade/FinalizarProdutividade";
+import { CheckCircle, PlusCircle, Clock } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function HeaderDashboard() {
@@ -16,7 +18,7 @@ export default function HeaderDashboard() {
           Visão geral dos processos logísticos
         </p>
       </div>
-      <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+      <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto items-center">
         <Button
           onClick={() => router.push("/addprodutividade")}
           className="gap-2 shadow-sm"
@@ -24,14 +26,18 @@ export default function HeaderDashboard() {
           <PlusCircle className="h-4 w-4" />
           Nova Produtividade
         </Button>
-        <Button
-          onClick={() => router.push("/finalizar")}
-          variant="outline"
-          className="gap-2"
-        >
-          <CheckCircle className="h-4 w-4" />
-          Finalizar
-        </Button>
+        <AddPauseButton>
+          <Button variant="outline" className="gap-2">
+            <Clock className="h-4 w-4" />
+            Adicionar Pausa
+          </Button>
+        </AddPauseButton>
+        <FinalizarProdutividade>
+          <Button variant="outline" className="gap-2">
+            <CheckCircle className="h-4 w-4" />
+            Finalizar
+          </Button>
+        </FinalizarProdutividade>
       </div>
     </div>
   );

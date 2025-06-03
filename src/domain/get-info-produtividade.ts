@@ -20,9 +20,11 @@ export type GetProdutividadeInfoResult = {
   visitado: number;
   horaInicio: Date;
   horaFim?: Date | null;
+  inicioPausa?: Date | null;
+  terminoPause?: Date | null;
   centerId: string;
   userId: string;
   dataRegistro: Date;
   funcionarioId: string;
-  produtividade: number
+  produtividade: number;
 };

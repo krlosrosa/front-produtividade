@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { GetProdutividadeResult } from "@/domain/get-produtividade";
-import { calcularProdutividade } from "@/utils/calcularProdutividade";
 import { format } from "date-fns";
 import { Gauge } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
@@ -106,7 +105,7 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
                 </p>
                 <p className="font-medium flex items-center gap-1">
                   <Gauge className="h-4 w-4 text-green-500" />
-                  {calcularProdutividade(item)}/h
+                  {item.produtividade}/h
                 </p>
               </div>
               <Badge

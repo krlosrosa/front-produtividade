@@ -1,9 +1,10 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Demanda } from "../atom";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { parseCadastroRapido } from "@/utils/cadastrorapido";
 
 type Props = {
@@ -19,6 +20,14 @@ export default function FuncionarioCadastro({
   infoQrCode,
   setInfoQrCode,
 }: Props) {
+  useEffect(() => {
+    setInfoQrCode("");
+    setDemandaOnChange({
+      idPallet: "",
+      transporte: "",
+    });
+  }, []);
+
   function handleCadastroRapido() {
     const info = parseCadastroRapido(infoQrCode);
     setDemandaOnChange({
@@ -28,9 +37,6 @@ export default function FuncionarioCadastro({
   }
   return (
     <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg">Finalizar</CardTitle>
-      </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label>Cadastro Rápido</Label>

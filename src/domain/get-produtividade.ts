@@ -22,4 +22,5 @@ export type GetProdutividadeResult = {
     userId: string;
     dataRegistro: Date;
     funcionarioId: string;
+    produtividade: number;
 };
