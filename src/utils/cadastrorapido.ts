@@ -1,5 +1,15 @@
 export function parseCadastroRapido(input: string): CadastroRapido {
-  const [empresa = "", transporte = "", processo = "", idPallet = "", quantidadeCaixa = "", quantidadeUnidade = "", linhasPickingVisitadas = ""] = input.split(";").map(s => s.trim());
+  const [
+    empresa = "",
+    transporte = "",
+    processo = "",
+    idPallet = "",
+    quantidadeCaixa = "",
+    quantidadeUnidade = "",
+    linhasPickingVisitadas = "",
+    segmento = "",
+    
+  ] = input.split(";").map((s) => s.trim());
 
   return {
     empresa,
@@ -8,6 +18,7 @@ export function parseCadastroRapido(input: string): CadastroRapido {
     quantidadeCaixa: parseInt(quantidadeCaixa),
     quantidadeUnidade: parseInt(quantidadeUnidade),
     linhasPickingVisitadas: parseInt(linhasPickingVisitadas),
+    segmento: segmento,
   };
 }
 
@@ -18,4 +29,5 @@ type CadastroRapido = {
   quantidadeCaixa: number;
   quantidadeUnidade: number;
   linhasPickingVisitadas: number;
+  segmento: string;
 };

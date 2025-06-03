@@ -50,6 +50,8 @@ export default function PageUser({ setTabSelect }: Props) {
     );
   });
 
+  console.log(formularios)
+
   async function handleAddProdutividade() {
     mutate.mutateAsync({
       horaInicio: new Date(),
@@ -62,6 +64,7 @@ export default function PageUser({ setTabSelect }: Props) {
       items: formularios,
       dataRegistro: processo.dataRegistro as Date,
       funcionarioId: user.id,
+      segmento: formularios[0].segmento
     });
   }
 

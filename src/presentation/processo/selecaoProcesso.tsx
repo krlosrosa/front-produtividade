@@ -25,7 +25,7 @@ import { useState } from "react";
 
 export default function ProcessSelectionPage() {
   const { setProcesso, processo } = useStoreProdutividade();
-  const [dataProcesso, setDataProcesso] = useState<Date>(new Date());
+  const [dataProcesso, setDataProcesso] = useState<Date | undefined>(undefined); // Alterado para undefined por padrão
   const { push } = useRouter();
 
   function redirectToProcess(value: string) {
@@ -79,9 +79,7 @@ export default function ProcessSelectionPage() {
                 <Calendar
                   mode="single"
                   selected={dataProcesso}
-                  onSelect={(date: Date | undefined) => {
-                    if (date) setDataProcesso(date);
-                  }}
+                  onSelect={setDataProcesso} // Simplificado pois já estamos tipando corretamente
                   initialFocus
                   locale={ptBR}
                 />
@@ -89,7 +87,7 @@ export default function ProcessSelectionPage() {
             </Popover>
           </div>
 
-          {/* Seleção do Processo */}
+          {/* Restante do seu código permanece igual */}
           <RadioGroup className="grid gap-4">
             <div>
               <RadioGroupItem
@@ -134,7 +132,6 @@ export default function ProcessSelectionPage() {
             </div>
           </RadioGroup>
 
-          {/* Botão de Continuar */}
           <Button
             onClick={handleContinue}
             disabled={processo.processo === "" || !dataProcesso}

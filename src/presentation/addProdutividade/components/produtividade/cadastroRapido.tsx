@@ -18,6 +18,7 @@ const [cadastroRapido, setCadastroRapido] = useState("");
 
   function fastCreate() {
     const retorno = parseCadastroRapido(cadastroRapido);
+    console.log(retorno)
     setFormulario({ ...retorno });
     adicionarFormulario()
     reset()

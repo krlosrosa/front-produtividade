@@ -5,6 +5,7 @@ export type Formulario = {
   quantidadeUnidade: number;
   linhasPickingVisitadas: number;
   empresa: string;
+  segmento: string
 };
 
 export type Resumo = {

@@ -40,6 +40,7 @@ export const useStoreProdutividade = create<Store>((set, get) => ({
     quantidadeCaixa: 0,
     quantidadeUnidade: 0,
     transporte: "",
+    segmento: "",
   },
   processo: {
     processo: "",
@@ -78,6 +79,7 @@ export const useStoreProdutividade = create<Store>((set, get) => ({
         quantidadeCaixa: 0,
         quantidadeUnidade: 0,
         transporte: state.formulario.transporte,
+        segmento: state.formulario.segmento,
       },
     })),
   resetForm: () =>
@@ -90,6 +92,7 @@ export const useStoreProdutividade = create<Store>((set, get) => ({
         quantidadeCaixa: 0,
         quantidadeUnidade: 0,
         transporte: "",
+        segmento: "",
       },
       resumo: {
         caixas: 0,

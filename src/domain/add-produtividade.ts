@@ -13,6 +13,7 @@ export type AddProdutividadeParams = {
     processo: "CONFERENCIA" | "SEPARACAO"; 
     empresa: "LDB" | "ITB" | "DPA"; 
     items: ItensProdutividade[];
+    segmento: string;
   };
 
 type ItensProdutividade = {

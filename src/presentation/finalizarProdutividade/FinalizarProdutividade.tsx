@@ -68,7 +68,14 @@ export default function FinalizarProdutividade({ children }: Props) {
           <Button
             className="w-full"
             onClick={openConfirmationDialog}
-            disabled={isLoading || data === undefined}
+            disabled={
+              isLoading ||
+              data === undefined ||
+              (data?.inicioPausa !== null &&
+                data?.inicioPausa !== undefined &&
+                (data?.terminoPause === null ||
+                  data?.terminoPause === undefined))
+            }
           >
             {isLoading ? "Processando..." : "Finalizar Produtividade"}
           </Button>

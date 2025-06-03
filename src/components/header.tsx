@@ -93,7 +93,9 @@ export default function Header() {
                   </div>
                 )}
               </div>
-
+<pre>
+  {JSON.stringify(session.user.accessToken)}
+</pre>
               {/* User Menu */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
