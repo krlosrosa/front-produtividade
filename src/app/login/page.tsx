@@ -79,7 +79,7 @@ export default function SignIn() {
             Bem-vindo de volta
           </CardTitle>
           <CardDescription className="text-center">
-            Entre com seu email e senha para acessar sua conta
+            Entre com seu Id e senha para acessar sua conta
           </CardDescription>
         </CardHeader>
 
