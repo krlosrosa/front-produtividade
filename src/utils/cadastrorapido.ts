@@ -1,4 +1,6 @@
-export function parseCadastroRapido(input: string): CadastroRapido {
+import { ProdutividadeFormType, ProdutividadeItemType } from "@/presentation/dashboard/types/produtividade";
+
+export function parseCadastroRapido(input: string): ProdutividadeItemType {
   const [
     empresa = "",
     transporte = "",
@@ -18,7 +20,8 @@ export function parseCadastroRapido(input: string): CadastroRapido {
     quantidadeCaixa: parseInt(quantidadeCaixa),
     quantidadeUnidade: parseInt(quantidadeUnidade),
     linhasPickingVisitadas: parseInt(linhasPickingVisitadas),
-    segmento: segmento,
+    processo: processo,
+    segmento: segmento as "SECO" | "REFRIGERADO",
   };
 }
 

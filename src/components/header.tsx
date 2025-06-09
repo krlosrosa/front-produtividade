@@ -14,11 +14,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { LogOut, Building } from "lucide-react";
-import { useStoreProdutividade } from "@/presentation/addProdutividade/components/atom";
 import { useRouter } from "next/navigation";
+import { useProdutividadeStore } from "@/presentation/dashboard/store/useProdutividadeStore";
 
 export default function Header() {
-  const { processo } = useStoreProdutividade();
+  const { processo } = useProdutividadeStore();
   const { push } = useRouter();
   const { data: session, status, update } = useSession();
   const router = useRouter();

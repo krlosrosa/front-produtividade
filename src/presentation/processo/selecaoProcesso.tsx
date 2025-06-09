@@ -9,7 +9,6 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Package, Truck } from "lucide-react";
-import { useStoreProdutividade } from "../addProdutividade/components/atom";
 import { useRouter } from "next/navigation";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -22,9 +21,10 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
+import { useProdutividadeStore } from "../dashboard/store/useProdutividadeStore";
 
 export default function ProcessSelectionPage() {
-  const { setProcesso, processo } = useStoreProdutividade();
+  const { setProcesso, processo } = useProdutividadeStore();
   const [dataProcesso, setDataProcesso] = useState<Date | undefined>(undefined); // Alterado para undefined por padrão
   const { push } = useRouter();
 
@@ -38,7 +38,7 @@ export default function ProcessSelectionPage() {
   function handleContinue() {
     if (processo && dataProcesso) {
       setProcesso({
-        processo: processo.processo,
+        processo: processo.processo.toUpperCase(),
         dataRegistro: dataProcesso,
       });
       push("/dash");

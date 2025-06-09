@@ -1,5 +1,3 @@
-import { RemoteGetProdutividadeByCenter } from "@/data/usecases/remote-get-produtividade-by-center";
-import { GetProdutividade } from "@/domain/get-produtividade";
 import { makeApiUrl } from "../http/api-url-factory";
 import { makeAxiosHttpClient } from "../http/axios-http-client-factory";
 import { AuthorizeHttpClientDecorator } from "@/main/decorators/authorize-http-client-decorator";
