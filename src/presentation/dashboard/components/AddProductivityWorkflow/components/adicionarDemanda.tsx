@@ -43,6 +43,7 @@ export default function AdicionarDemandaButton() {
       <Button
         onClick={openConfirmationDialog}
         className="w-full bg-green-600 hover:bg-green-700 h-9 text-sm"
+        disabled={itensProdutividade.length === 0 || user.id === ""}
       >
         <Plus className="w-3 h-3 mr-1" />
         Adicionar Demanda

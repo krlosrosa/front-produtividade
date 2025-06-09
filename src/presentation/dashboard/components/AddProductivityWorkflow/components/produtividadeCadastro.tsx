@@ -5,7 +5,7 @@ import CadastroManualProdutividade from "./cadastroManualProdutividade";
 import { useProdutividadeStore } from "@/presentation/dashboard/store/useProdutividadeStore";
 
 export default function ProdutividadeCadastro() {
-    const { setTabSelect } =
+    const { setTabSelect, itensProdutividade } =
       useProdutividadeStore();
   
   return (
@@ -23,7 +23,7 @@ export default function ProdutividadeCadastro() {
             <CadastroManualProdutividade />
           </TabsContent>
         </Tabs>
-        <Button onClick={()=> setTabSelect("funcionario")} className="w-full mt-2">Adicionar Funcionário</Button>
+        <Button disabled={itensProdutividade.length === 0} onClick={()=> setTabSelect("funcionario")} className="w-full mt-2">Adicionar Funcionário</Button>
       </div>
     </div>
   );
