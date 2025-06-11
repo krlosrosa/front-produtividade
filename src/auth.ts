@@ -30,6 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               name: user.name,
               center: user.center,
               accessToken: user.accessToken,
+              resetSenha: user.resetSenha
             };
           }
 
@@ -48,6 +49,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.accessToken = user.accessToken;
         token.name = user.name;
         token.center = user.center;
+        token.resetSenha = user.resetSenha
       }
       return token;
     },
@@ -57,11 +59,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         accessToken?: string;
         name?: string;
         center?: string;
+        resetSenha?: boolean
       };
 
       session.user.accessToken = typedToken.accessToken;
       session.user.name = typedToken.name;
       session.user.center = typedToken.center;
+      session.user.resetSenha = typedToken.resetSenha
 
       return session;
     },

@@ -22,6 +22,10 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  if(session.user.resetSenha && path !== "/reset") {
+    return NextResponse.redirect(new URL("/reset", request.url));
+  }
+
   // Se estiver autenticado, permita o acesso
   return NextResponse.next();
 }
