@@ -22,7 +22,7 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if(session.user.resetSenha && path !== "/reset") {
+  if(session?.user?.resetSenha && path !== "/reset") {
     return NextResponse.redirect(new URL("/reset", request.url));
   }
 
