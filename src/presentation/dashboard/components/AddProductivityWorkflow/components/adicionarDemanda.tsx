@@ -24,7 +24,7 @@ export default function AdicionarDemandaButton() {
       mutate({
         caixas: quantidadeAcumulada.caixas,
         unidade: quantidadeAcumulada.unidades,
-        visitado: quantidadeAcumulada.unidades,
+        visitado: quantidadeAcumulada.enderecos,
         empresa: itensProdutividade[0].empresa as  "LDB" | "ITB" | "DPA",
         funcionarioId: user.id,
         segmento: itensProdutividade[0].segmento,

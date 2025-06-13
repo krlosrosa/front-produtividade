@@ -10,7 +10,6 @@ export function parseCadastroRapido(input: string): ProdutividadeItemType {
     segmento = "",
     empresa = "",
     processo = "",
-    
   ] = input.split(";").map((s) => s.trim());
 
   return {
@@ -24,13 +23,3 @@ export function parseCadastroRapido(input: string): ProdutividadeItemType {
     segmento: segmento as "SECO" | "REFRIGERADO",
   };
 }
-
-type CadastroRapido = {
-  empresa: string;
-  transporte: string;
-  idPallet: string;
-  quantidadeCaixa: number;
-  quantidadeUnidade: number;
-  linhasPickingVisitadas: number;
-  segmento: string;
-};
