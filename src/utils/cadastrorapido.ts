@@ -2,14 +2,14 @@ import { ProdutividadeFormType, ProdutividadeItemType } from "@/presentation/das
 
 export function parseCadastroRapido(input: string): ProdutividadeItemType {
   const [
-    empresa = "",
     transporte = "",
-    processo = "",
     idPallet = "",
     quantidadeCaixa = "",
     quantidadeUnidade = "",
     linhasPickingVisitadas = "",
     segmento = "",
+    empresa = "",
+    processo = "",
     
   ] = input.split(";").map((s) => s.trim());
 
