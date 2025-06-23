@@ -43,8 +43,8 @@ export const useAddProdutividadeMutation = () => {
         queryKey: ["statusCenter"],
       });
     },
-    onError: (error) => {
-      toast.error(`Erro ao cadastrar produtividade ${JSON.stringify(error)}`);
+    onError: (error,variables) => {
+      toast.error(`Erro ao cadastrar produtividade do Transporte: ${variables.transporte}, você já realizou esse cadastro, favor verificar o ID `);
     },
   });
 };

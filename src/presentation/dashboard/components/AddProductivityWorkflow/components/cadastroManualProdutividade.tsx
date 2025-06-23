@@ -14,7 +14,6 @@ import {
   Plus,
   RotateCcw,
   Snowflake,
-  Warehouse,
 } from "lucide-react";
 import {
   ProdutividadeFormType,
@@ -35,10 +34,10 @@ export default function CadastroManualProdutividade() {
       empresa: "",
       transporte: "",
       idPallet: "",
-      quantidadeCaixa: "", // Mudado para string vazia
-      quantidadeUnidade: "", // Mudado para string vazia
-      linhasPickingVisitadas: "", // Mudado para string vazia
-      segmento: "REFRIGERADO"
+      quantidadeCaixa: "",
+      quantidadeUnidade: "",
+      linhasPickingVisitadas: "",
+      segmento: "REFRIGERADO",
     },
   });
 
@@ -49,6 +48,13 @@ export default function CadastroManualProdutividade() {
 
   const handleReset = () => {
     reset();
+  };
+
+  const validateNumber = (value: string) => {
+    const num = Number(value);
+    if (isNaN(num)) return "Digite um número válido";
+    if (num < 0) return "Valor não pode ser negativo";
+    return true;
   };
 
   return (
@@ -66,12 +72,18 @@ export default function CadastroManualProdutividade() {
                   <Building2 className="w-3.5 h-3.5 text-gray-400" />
                   Empresa *
                 </Label>
-                <Input
+                <select
                   id="empresa"
-                  {...register("empresa", { required: "Campo obrigatório" })}
-                  placeholder="Digite o nome da empresa"
-                  className="h-10 focus:ring-2 focus:ring-blue-500 transition-all"
-                />
+                  {...register("empresa", {
+                    required: "Selecione uma empresa",
+                  })}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="">Selecione uma empresa</option>
+                  <option value="LDB">LDB</option>
+                  <option value="DPA">DPA</option>
+                  <option value="ITB">ITB</option>
+                </select>
                 {errors.empresa && (
                   <p className="text-red-500 text-xs mt-1">
                     {errors.empresa.message}
@@ -90,7 +102,7 @@ export default function CadastroManualProdutividade() {
                 <Input
                   id="transporte"
                   {...register("transporte", { required: "Campo obrigatório" })}
-                  placeholder="Tipo de transporte"
+                  placeholder="Digite o tipo de transporte"
                   className="h-10 focus:ring-2 focus:ring-blue-500 transition-all"
                 />
                 {errors.transporte && (
@@ -108,14 +120,19 @@ export default function CadastroManualProdutividade() {
                   className="text-sm font-medium flex items-center gap-2"
                 >
                   <Hash className="w-3.5 h-3.5 text-gray-400" />
-                  ID do Pallet
+                  ID do Pallet *
                 </Label>
                 <Input
                   id="idPallet"
-                  {...register("idPallet")}
-                  placeholder="Identificação do pallet (opcional)"
+                  {...register("idPallet", { required: "Campo obrigatório" })}
+                  placeholder="Digite a identificação do pallet"
                   className="h-10 focus:ring-2 focus:ring-blue-500 transition-all"
                 />
+                {errors.idPallet && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.idPallet.message}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -128,7 +145,9 @@ export default function CadastroManualProdutividade() {
                 </Label>
                 <select
                   id="segmento"
-                  {...register("segmento", { required: "Campo obrigatório" })}
+                  {...register("segmento", {
+                    required: "Selecione um segmento",
+                  })}
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <option value="REFRIGERADO">REFRIGERADO</option>
@@ -147,7 +166,7 @@ export default function CadastroManualProdutividade() {
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-sm font-medium text-gray-700 border-b pb-2">
               <Package className="w-4 h-4 text-green-600" />
-              Quantidades
+              Quantidades *
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -157,7 +176,7 @@ export default function CadastroManualProdutividade() {
                   className="text-sm font-medium flex items-center gap-2"
                 >
                   <Box className="w-3.5 h-3.5 text-blue-500" />
-                  Caixas
+                  Caixas *
                 </Label>
                 <div className="relative">
                   <Input
@@ -165,13 +184,22 @@ export default function CadastroManualProdutividade() {
                     type="number"
                     min="0"
                     placeholder="0"
-                    {...register("quantidadeCaixa", { valueAsNumber: true })}
+                    {...register("quantidadeCaixa", {
+                      required: "Campo obrigatório",
+                      valueAsNumber: true,
+                      validate: validateNumber
+                    })}
                     className="h-10 focus:ring-2 focus:ring-blue-500 transition-all pr-8"
                   />
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium">
                     cx
                   </div>
                 </div>
+                {errors.quantidadeCaixa && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.quantidadeCaixa.message}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -180,7 +208,7 @@ export default function CadastroManualProdutividade() {
                   className="text-sm font-medium flex items-center gap-2"
                 >
                   <Package className="w-3.5 h-3.5 text-green-500" />
-                  Unidades
+                  Unidades *
                 </Label>
                 <div className="relative">
                   <Input
@@ -188,13 +216,22 @@ export default function CadastroManualProdutividade() {
                     type="number"
                     min="0"
                     placeholder="0"
-                    {...register("quantidadeUnidade", { valueAsNumber: true })}
+                    {...register("quantidadeUnidade", {
+                      required: "Campo obrigatório",
+                      valueAsNumber: true,
+                      validate: validateNumber
+                    })}
                     className="h-10 focus:ring-2 focus:ring-green-500 transition-all pr-8"
                   />
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium">
                     un
                   </div>
                 </div>
+                {errors.quantidadeUnidade && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.quantidadeUnidade.message}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -203,7 +240,7 @@ export default function CadastroManualProdutividade() {
                   className="text-sm font-medium flex items-center gap-2"
                 >
                   <BarChart3 className="w-3.5 h-3.5 text-purple-500" />
-                  Linhas
+                  Linhas *
                 </Label>
                 <div className="relative">
                   <Input
@@ -212,7 +249,9 @@ export default function CadastroManualProdutividade() {
                     min="0"
                     placeholder="0"
                     {...register("linhasPickingVisitadas", {
+                      required: "Campo obrigatório",
                       valueAsNumber: true,
+                      validate: validateNumber
                     })}
                     className="h-10 focus:ring-2 focus:ring-purple-500 transition-all pr-8"
                   />
@@ -220,6 +259,11 @@ export default function CadastroManualProdutividade() {
                     ln
                   </div>
                 </div>
+                {errors.linhasPickingVisitadas && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.linhasPickingVisitadas.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
