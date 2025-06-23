@@ -51,7 +51,8 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
           key={index}
           className="p-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
         >
-          <div className="flex items-start justify-between gap-4">
+          {/* Layout Desktop */}
+          <div className="hidden sm:flex items-start justify-between gap-4">
             {/* Coluna Esquerda - Informações principais */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
@@ -117,6 +118,81 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
               >
                 {item.horaFim ? "✓" : "⌛"}
               </Badge>
+            </div>
+          </div>
+
+          {/* Layout Mobile */}
+          <div className="sm:hidden space-y-3">
+            {/* Header com título e status */}
+            <div className="flex items-center justify-between">
+              <h3 className="font-medium">#{item.transporte}</h3>
+              <Badge
+                variant={item.horaFim ? "default" : "outline"}
+                className="h-6 px-2 text-xs"
+              >
+                {item.horaFim ? "✓" : "⌛"}
+              </Badge>
+            </div>
+
+            {/* Badges */}
+            <div className="flex flex-wrap gap-1">
+              <Badge variant="outline" className="text-xs">
+                {item.empresa}
+              </Badge>
+              <Badge variant="outline" className="text-xs">
+                {item.id}
+              </Badge>
+              <Badge
+                variant={
+                  item.processo === "Separação" ? "default" : "secondary"
+                }
+                className="text-xs"
+              >
+                {item.processo}
+              </Badge>
+            </div>
+
+            {/* Horário e funcionário */}
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-600 dark:text-gray-400">
+                {format(new Date(item.horaInicio), "HH:mm")}
+                {item.horaFim &&
+                  ` → ${format(new Date(item.horaFim), "HH:mm")}`}
+              </span>
+              <span className="text-gray-500 dark:text-gray-400 text-xs">
+                {item.funcionarioId.replace("func_", "")}
+              </span>
+            </div>
+
+            {/* Métricas em grid 2x2 */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Caixas:
+                </span>
+                <span className="font-medium">{item.caixas || 0}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Unidades:
+                </span>
+                <span className="font-medium">{item.unidade || 0}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Visitados:
+                </span>
+                <span className="font-medium">{item.visitado || 0}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Produtividade:
+                </span>
+                <span className="font-medium flex items-center gap-1">
+                  <Gauge className="h-3 w-3 text-green-500" />
+                  {item.produtividade}/h
+                </span>
+              </div>
             </div>
           </div>
         </Card>
