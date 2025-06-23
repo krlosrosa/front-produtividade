@@ -13,6 +13,8 @@ import {
   BarChart3,
   Plus,
   RotateCcw,
+  Snowflake,
+  Warehouse,
 } from "lucide-react";
 import {
   ProdutividadeFormType,
@@ -36,6 +38,7 @@ export default function CadastroManualProdutividade() {
       quantidadeCaixa: "", // Mudado para string vazia
       quantidadeUnidade: "", // Mudado para string vazia
       linhasPickingVisitadas: "", // Mudado para string vazia
+      segmento: "REFRIGERADO"
     },
   });
 
@@ -98,20 +101,45 @@ export default function CadastroManualProdutividade() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label
-                htmlFor="idPallet"
-                className="text-sm font-medium flex items-center gap-2"
-              >
-                <Hash className="w-3.5 h-3.5 text-gray-400" />
-                ID do Pallet
-              </Label>
-              <Input
-                id="idPallet"
-                {...register("idPallet")}
-                placeholder="Identificação do pallet (opcional)"
-                className="h-10 focus:ring-2 focus:ring-blue-500 transition-all"
-              />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="idPallet"
+                  className="text-sm font-medium flex items-center gap-2"
+                >
+                  <Hash className="w-3.5 h-3.5 text-gray-400" />
+                  ID do Pallet
+                </Label>
+                <Input
+                  id="idPallet"
+                  {...register("idPallet")}
+                  placeholder="Identificação do pallet (opcional)"
+                  className="h-10 focus:ring-2 focus:ring-blue-500 transition-all"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label
+                  htmlFor="segmento"
+                  className="text-sm font-medium flex items-center gap-2"
+                >
+                  <Snowflake className="w-3.5 h-3.5 text-blue-400" />
+                  Segmento *
+                </Label>
+                <select
+                  id="segmento"
+                  {...register("segmento", { required: "Campo obrigatório" })}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="REFRIGERADO">REFRIGERADO</option>
+                  <option value="SECO">SECO</option>
+                </select>
+                {errors.segmento && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.segmento.message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 

@@ -36,6 +36,7 @@ export type ProdutividadeFormType = {
   quantidadeCaixa: string;
   quantidadeUnidade: string;
   linhasPickingVisitadas: string;
+  segmento: "SECO" | "REFRIGERADO";
 };
 
 
