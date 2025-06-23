@@ -139,9 +139,6 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
               <Badge variant="outline" className="text-xs">
                 {item.empresa}
               </Badge>
-              <Badge variant="outline" className="text-xs">
-                {item.id}
-              </Badge>
               <Badge
                 variant={
                   item.processo === "Separação" ? "default" : "secondary"
