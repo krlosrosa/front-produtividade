@@ -82,6 +82,9 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
                 <span className="text-gray-500 dark:text-gray-400 text-xs">
                   {item.funcionarioId.replace("func_", "")}
                 </span>
+                <span className="text-gray-500 dark:text-gray-400 text-xs">
+                  {item.nomeFuncionario.replace("func_", "")}
+                </span>
               </div>
             </div>
 
@@ -156,8 +159,13 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
                 {item.horaFim &&
                   ` → ${format(new Date(item.horaFim), "HH:mm")}`}
               </span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
               <span className="text-gray-500 dark:text-gray-400 text-xs">
                 {item.funcionarioId.replace("func_", "")}
+              </span>
+              <span className="text-gray-500 dark:text-gray-400 text-xs">
+                {item.nomeFuncionario.replace("func_", "")}
               </span>
             </div>
 
