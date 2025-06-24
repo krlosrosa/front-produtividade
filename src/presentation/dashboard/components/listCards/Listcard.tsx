@@ -25,7 +25,8 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
     const filtroTexto =
       filtrar.filtro.length <= 2 ||
       item.transporte.includes(filtrar.filtro) ||
-      item.funcionarioId.includes(filtrar.filtro);
+      item.funcionarioId.includes(filtrar.filtro) ||
+      item.nomeFuncionario.toUpperCase().includes(filtrar.filtro.toUpperCase())
 
     // Filtro por estado
     let filtroEstado = true;
