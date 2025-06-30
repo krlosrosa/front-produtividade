@@ -1,9 +1,10 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { GetProdutividadeResult } from "@/domain/get-produtividade";
 import { Boxes, CheckCheck, Loader, Package } from "lucide-react";
+import { DashType } from "../types/dashType";
 
 type Props = {
-  data: GetProdutividadeResult[];
+  data: DashType;
   filtrar: {
     estado: string;
     filtro: string;
@@ -11,24 +12,6 @@ type Props = {
 };
 
 export default function StatusDashBoard({ data, filtrar }: Props) {
-  // Filtra os dados apenas por estado (ignora o filtro de texto)
-  const dadosFiltrados = data.filter((item) => {
-    switch (filtrar.estado) {
-      case "progress":
-        return !item.horaFim; // Em andamento = sem horaFim
-      case "completed":
-        return !!item.horaFim; // Concluído = com horaFim
-      case "all":
-      default:
-        return true; // Todos = sem filtro
-    }
-  });
-
-  // Calcula métricas totais baseadas nos dados FILTRADOS por estado
-  const totalProcessos = dadosFiltrados.length;
-  const processosConcluidos = dadosFiltrados.filter((item) => item.horaFim).length;
-  const processosEmAndamento = totalProcessos - processosConcluidos;
-  const totalCaixas = dadosFiltrados.reduce((sum, item) => sum + (item.caixas || 0), 0);
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -42,7 +25,7 @@ export default function StatusDashBoard({ data, filtrar }: Props) {
             <Boxes className="h-8 w-8 text-blue-400" />
           </div>
           <div className="text-xl font-bold text-blue-800">
-            {totalProcessos}
+            {data.totalProcess}
           </div>
         </CardContent>
       </Card>
@@ -57,7 +40,7 @@ export default function StatusDashBoard({ data, filtrar }: Props) {
             <Loader className="h-8 w-8 text-amber-400 animate-spin" />
           </div>
           <div className="text-md font-bold text-amber-800">
-            {processosEmAndamento}
+            {data.emAndamento}
           </div>
         </CardContent>
       </Card>
@@ -72,7 +55,7 @@ export default function StatusDashBoard({ data, filtrar }: Props) {
             <CheckCheck className="h-8 w-8 text-emerald-400" />
           </div>
           <div className="text-md font-bold text-emerald-800">
-            {processosConcluidos}
+            {data.concluido}
           </div>
         </CardContent>
       </Card>
@@ -86,7 +69,7 @@ export default function StatusDashBoard({ data, filtrar }: Props) {
             </CardTitle>
             <Package className="h-8 w-8 text-violet-400" />
           </div>
-          <div className="text-xl font-bold text-violet-800">{totalCaixas}</div>
+          <div className="text-xl font-bold text-violet-800">{data.totalCaixas}</div>
         </CardContent>
       </Card>
     </div>

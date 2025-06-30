@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useProdutividadeStore } from "./store/useProdutividadeStore";
+import { adaptProdutividadeToDash } from "./adapters/dashAdapter";
 
 export default function DashboardPage() {
   const { data, isError, isLoading } = useProdutividadeQuery();
@@ -30,6 +31,8 @@ export default function DashboardPage() {
   }, [processo.processo]);
   if (isLoading) return <div>Carregando...</div>;
   if (isError) return <div>Error...</div>;
+  if (!data) return <div>Sem dados</div>;
+  const dataTratado = adaptProdutividadeToDash(data);
 
   // Função para calcular a produtividade (caixas/hora)
   return (
@@ -37,7 +40,7 @@ export default function DashboardPage() {
       {/* Header */}
       <HeaderDashboard />
       {/* Métricas - Cards Compactos */}
-      {data && <StatusDashBoard filtrar={filtrar} data={data} />}
+      {data && <StatusDashBoard filtrar={filtrar} data={dataTratado} />}
       {/* Filtros */}
       <FiltrosDashboard filtrar={filtrar} setFiltrar={setFiltrar} />
       {/* Lista de Itens*/}
@@ -45,7 +48,7 @@ export default function DashboardPage() {
         <ListCardProdutividadeDash
           setFiltrar={setFiltrar}
           filtrar={filtrar}
-          data={data as GetProdutividadeResult[]}
+          data={dataTratado}
         />
       )}
     </div>

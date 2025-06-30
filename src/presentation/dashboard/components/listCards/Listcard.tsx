@@ -4,9 +4,10 @@ import { GetProdutividadeResult } from "@/domain/get-produtividade";
 import { format } from "date-fns";
 import { Gauge } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
+import { DashType } from "../../types/dashType";
 
 type Props = {
-  data: GetProdutividadeResult[];
+  data: DashType;
   filtrar: {
     estado: string;
     filtro: string;
@@ -20,7 +21,7 @@ type Props = {
 };
 
 export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
-  const itensFiltrados = data.filter((item) => {
+  const itensFiltrados = data.listItens.filter((item) => {
     // Filtro por texto (busca)
     const filtroTexto =
       filtrar.filtro.length <= 2 ||
@@ -32,10 +33,10 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
     let filtroEstado = true;
     switch (filtrar.estado) {
       case "progress":
-        filtroEstado = !item.horaFim; // Em andamento = sem horaFim
+        filtroEstado = !item.horarioTermino; // Em andamento = sem.horarioTermino
         break;
       case "completed":
-        filtroEstado = !!item.horaFim; // Concluído = com horaFim
+        filtroEstado = !!item.horarioTermino; // Concluído = com.horarioTermino
         break;
       case "all":
       default:
@@ -76,9 +77,9 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
 
               <div className="mt-1 flex items-center gap-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">
-                  {format(new Date(item.horaInicio), "HH:mm")}
-                  {item.horaFim &&
-                    ` → ${format(new Date(item.horaFim), "HH:mm")}`}
+                  {format(new Date(item.horarioInicio), "HH:mm")}
+                  {item.horarioTermino &&
+                    ` → ${format(new Date(item.horarioTermino), "HH:mm")}`}
                 </span>
                 <span className="text-gray-500 dark:text-gray-400 text-xs">
                   {item.funcionarioId.replace("func_", "")}
@@ -105,7 +106,7 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
               </div>
               <div className="text-center">
                 <p className="text-xs text-gray-500 dark:text-gray-400">Vis.</p>
-                <p className="font-medium">{item.visitado || 0}</p>
+                <p className="font-medium">{item.visitas || 0}</p>
               </div>
               <div className="text-center">
                 <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -117,10 +118,10 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
                 </p>
               </div>
               <Badge
-                variant={item.horaFim ? "default" : "outline"}
+                variant={item.horarioTermino ? "default" : "outline"}
                 className="h-6 px-2 text-xs"
               >
-                {item.horaFim ? "✓" : "⌛"}
+                {item.horarioTermino ? "✓" : "⌛"}
               </Badge>
             </div>
           </div>
@@ -131,10 +132,10 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
             <div className="flex items-center justify-between">
               <h3 className="font-medium">#{item.transporte}</h3>
               <Badge
-                variant={item.horaFim ? "default" : "outline"}
+                variant={item.horarioTermino ? "default" : "outline"}
                 className="h-6 px-2 text-xs"
               >
-                {item.horaFim ? "✓" : "⌛"}
+                {item.horarioTermino ? "✓" : "⌛"}
               </Badge>
             </div>
 
@@ -156,9 +157,9 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
             {/* Horário e funcionário */}
             <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600 dark:text-gray-400">
-                {format(new Date(item.horaInicio), "HH:mm")}
-                {item.horaFim &&
-                  ` → ${format(new Date(item.horaFim), "HH:mm")}`}
+                {format(new Date(item.horarioInicio), "HH:mm")}
+                {item.horarioTermino &&
+                  ` → ${format(new Date(item.horarioTermino), "HH:mm")}`}
               </span>
             </div>
             <div className="flex items-center justify-between text-sm">
@@ -188,7 +189,7 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
                 <span className="text-xs text-gray-500 dark:text-gray-400">
                   Visitados:
                 </span>
-                <span className="font-medium">{item.visitado || 0}</span>
+                <span className="font-medium">{item.visitas || 0}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-xs text-gray-500 dark:text-gray-400">
