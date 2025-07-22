@@ -15,7 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { LogOut, Building } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useProdutividadeStore } from "@/presentation/dashboard/store/useProdutividadeStore";
+import { useProdutividadeStore } from "@/presentation/produtividade/dashboard/store/useProdutividadeStore";
 
 export default function Header() {
   const { processo } = useProdutividadeStore();

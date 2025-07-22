@@ -17,7 +17,6 @@ export class RemoteAddProdutividade implements AddProdutividade{
       method: 'post',
       body: params
     })
-    console.log(httpResponse)
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok: return httpResponse.body as boolean
       default: throw new UnexpectedError()

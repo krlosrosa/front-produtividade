@@ -36,7 +36,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           return null;
         } catch (err) {
-          console.error("Erro ao autenticar:", err);
           return null;
         }
       },

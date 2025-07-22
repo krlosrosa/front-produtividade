@@ -1,11 +1,10 @@
 import {
   ProdutividadeFormType,
   ProdutividadeItemType,
-} from "@/presentation/dashboard/types/produtividade";
+} from "@/presentation/produtividade/dashboard/types/produtividade";
 
 export function parseCadastroRapido(input: string): ProdutividadeItemType {
   if (input.includes("ç")) {
-    console.log(input)
     const [
       transporte = "",
       idPallet = "",

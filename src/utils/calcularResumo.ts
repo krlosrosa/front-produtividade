@@ -1,7 +1,7 @@
 import {
   ProdutividadeItemType,
   QuantidadeProdutividadeAcc,
-} from "@/presentation/dashboard/types/produtividade";
+} from "@/presentation/produtividade/dashboard/types/produtividade";
 
 export function calcularResumo(
   formularios: ProdutividadeItemType[]
