@@ -1,7 +1,7 @@
 // src/store/useTransporteStore.ts
 
 import { create } from "zustand";
-import { RemessasItem } from "@/utils/uploads/remessas";
+import { RemessasItem } from "../utils/remessas";
 
 interface RemessaStore {
   dataRemessa: RemessasItem[];

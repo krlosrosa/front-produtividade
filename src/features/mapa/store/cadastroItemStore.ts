@@ -1,7 +1,8 @@
 // src/store/useTransporteStore.ts
 
 import { create } from "zustand";
-import { CadastroProdutoItem } from "@/utils/uploads/cadastrosProdutos";
+import { CadastroProdutoItem } from "../utils/cadastrosProdutos";
+  
 
 interface CadastroItemStore {
   dataCadastroItem: CadastroProdutoItem[];

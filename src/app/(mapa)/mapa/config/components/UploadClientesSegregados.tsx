@@ -130,7 +130,7 @@ export function UploadClientesSegregados({ onUploadComplete }: UploadClientesSeg
         <p>• O arquivo deve conter uma coluna com os códigos dos clientes</p>
         <p>• Formatos aceitos: .xlsx, .xls</p>
         <p>• Nomes de coluna aceitos: "Código do Cliente", "Código Cliente", "CodCliente", "Cliente", "Código"</p>
-      </div>
+      </div>  
     </div>
   )
 } 
