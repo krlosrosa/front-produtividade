@@ -12,6 +12,8 @@ type Props = {
   setDemandaOnChange: (params: Partial<DemandaSelecionada>) => void;
   infoQrCode: string;
   setInfoQrCode: Dispatch<SetStateAction<string>>;
+  observacao: string;
+  setObservacao: Dispatch<SetStateAction<string>>;
 };
 
 export default function FuncionarioCadastro({
@@ -19,6 +21,8 @@ export default function FuncionarioCadastro({
   setDemandaOnChange,
   infoQrCode,
   setInfoQrCode,
+  observacao,
+  setObservacao,
 }: Props) {
   useEffect(() => {
     setInfoQrCode("");
@@ -81,6 +85,13 @@ export default function FuncionarioCadastro({
               }
             />
           </div>
+        </div>
+        <div className="space-y-1"> 
+          <Label>Observação</Label>
+          <Input
+            value={observacao}
+            onChange={(e) => setObservacao(e.target.value)}
+          />
         </div>
       </CardContent>
     </Card>

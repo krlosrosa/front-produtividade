@@ -86,6 +86,9 @@ export default function ListCardProdutividadeDash({ data, filtrar }: Props) {
                 <span className="text-gray-500 dark:text-gray-400 text-xs">
                   {item.nomeFuncionario.replace("func_", "")}
                 </span>
+                <span className="text-gray-500 dark:text-gray-400 text-xs">
+                  {item.observacao?.informacao}
+                </span>
               </div>
             </div>
 

@@ -24,6 +24,7 @@ import { useFinalizarProdutividadeMutation } from "../../application/useFinaliza
 import { useProdutividadeStore } from "../../store/useProdutividadeStore";
 import { useBuscarInfoProdutividadeQuery } from "../../application/useBuscarInfoProdutividade";
 import { useStatusCenterQuery } from "../../application/use-status-center-query";
+import { Input } from "@/components/ui/input";
 
 export default function FinalizarProdutividadePage() {
   const { demanda, setDemandaOnChange } = useProdutividadeStore();
@@ -32,11 +33,16 @@ export default function FinalizarProdutividadePage() {
   const [infoQrCode, setInfoQrCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [observacao, setObservacao] = useState("");
   const { data } = useBuscarInfoProdutividadeQuery();
   const { mutateAsync, isPending } = useFinalizarProdutividadeMutation();
 
   const handleAddProdutividade = async () => {
-    await mutateAsync();
+    await mutateAsync({
+      observacao: {
+        informacao: observacao,
+      },
+    });
     setInfoQrCode("");
     setDemandaOnChange({
       idPallet: "",
@@ -85,6 +91,8 @@ export default function FinalizarProdutividadePage() {
           <ResumoTransporte data={data} />
           {/* Resumo de cadastro */}
           <FuncionarioCadastro
+            observacao={observacao}
+            setObservacao={setObservacao}
             setInfoQrCode={setInfoQrCode}
             infoQrCode={infoQrCode}
             demanda={demanda}

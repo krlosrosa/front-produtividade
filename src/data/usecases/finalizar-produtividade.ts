@@ -3,6 +3,7 @@ import { UnexpectedError } from "@/domain/errors";
 import {
   FinalizarProdutividade,
   FinalizarProdutividadeInfoParams,
+  FinalizarProdutividadeInfoParamsObservacao,
 } from "@/domain/finalizar-produtividade";
 
 export class RemoteFinalizarProdutividade implements FinalizarProdutividade {
@@ -11,10 +12,11 @@ export class RemoteFinalizarProdutividade implements FinalizarProdutividade {
     private readonly httpClient: HttpClient<boolean>
   ) {}
 
-  async finalizarProdutividade(): Promise<boolean> {
+  async finalizarProdutividade(params?: FinalizarProdutividadeInfoParamsObservacao): Promise<boolean> {
     const httpResponse = await this.httpClient.request({
       url: this.url,
       method: "put",
+      body: params
     });
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:

@@ -11,7 +11,13 @@ export const useFinalizarProdutividadeMutation = () => {
   const queryClient = useQueryClient();
   const { processo, demanda } = useProdutividadeStore();
 
-  const mutationFn = async () => {
+  type FinalizarProdutividadeParams = {
+    observacao?: {
+      informacao: string;
+    }
+  }
+
+  const mutationFn = async (params?: FinalizarProdutividadeParams) => {
     if (
       !session?.user.accessToken ||
       !session.user.center ||
@@ -24,8 +30,8 @@ export const useFinalizarProdutividadeMutation = () => {
       processo.processo as "SEPARACAO" | "CARREGAMENTO",
       demanda.idPallet,
       demanda.transporte,
-      session.user.accessToken
-    ).finalizarProdutividade();
+      session.user.accessToken,
+    ).finalizarProdutividade(params);
   };
 
   return useMutation({

@@ -1,9 +1,16 @@
 export interface FinalizarProdutividade {
-  finalizarProdutividade: () => Promise<boolean>;
+  finalizarProdutividade: (params?: FinalizarProdutividadeInfoParamsObservacao) => Promise<boolean>;
 }
 
 export type FinalizarProdutividadeInfoParams = {
   processo: string;
   idPallet: string;
   transporte: string;
+  observacao?: FinalizarProdutividadeInfoParamsObservacao;
+};
+
+export type FinalizarProdutividadeInfoParamsObservacao = {
+  observacao?: {
+    informacao: string;
+  }
 };
